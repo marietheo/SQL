@@ -1,102 +1,48 @@
-# AdventureWorks Forsaljningsanalys
+# AdventureWorks - Försäljningsanalys
 
-Jupyter Notebook-projekt for analys av AdventureWorks-databasen med Python och SQL Server.
+Analys av försäljningsdata från AdventureWorks-databasen med fokus på:
+- Produktkategorier och omsättning
+- Försäljningstrender över tid
+- Regional försäljning och kundtyper
+- Kundsegmentering och churn-analys
 
-## Innehall
+## Miljö
+- **Python:** 3.13.7
+- **Databas:** SQL Server Express (AdventureWorks2025)
+- **Paket:** Pandas, NumPy, Matplotlib, Seaborn, SQLAlchemy, PyODBC
 
-- **7 visualiseringar** som besvarar affarsfragor
-- **Kundvarde-analys** med RFM-segmentering
-- **Pivot tables** for kundsegmentering
-- **Sammanfattning** med rekommendationer
-
-## Krav
-
-### Python-bibliotek
+## Kom igång
 ```bash
-pip install pandas matplotlib seaborn sqlalchemy pyodbc numpy
-```
-
-### Databas
-- Microsoft SQL Server med AdventureWorks2022-databasen
-- ODBC Driver 17 eller 18 for SQL Server
-
-## Installation
-
-1. Klona repot:
-```bash
-git clone <repo-url>
+# Klona projektet
+git clone https://github.com/marietheo/SQL.git
 cd SQL
-```
 
-2. Installera dependencies:
-```bash
+# Skapa och aktivera virtuell miljö
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# Mac/Linux
+source .venv/bin/activate
+
+# Installera beroenden
 pip install -r requirements.txt
 ```
 
-3. Konfigurera databasanslutning i notebooken (Setup-cellen)
-
 ## Databasanslutning
-
-Notebooken stodjer tre anslutningsmetoder:
-
-### Docker (Linux/Mac)
+Uppdatera anslutningsuppgifterna i notebook-filen vid behov:
 ```python
-server = 'localhost,1433'
-driver = 'ODBC Driver 18 for SQL Server'
+server = 'localhost\\SQLEXPRESS'
+database = 'AdventureWorks2025'
 ```
 
-### SSMS (Windows)
-```python
-server = 'localhost'
-driver = 'ODBC Driver 17 for SQL Server'
-```
+## Sammanfattning
 
-### SQL Server med losenord
-```python
-server = 'localhost'
-username = 'sa'
-password = 'ditt_losenord'
-```
+Analysen visar att merparten av omsättningen är koncentrerad till ett fåtal B2B-kunder, vilket utgör en affärsrisk. 
 
-## Visualiseringar
-
-| # | Analys | Diagramtyp |
-|---|--------|------------|
-| 1 | Antal produkter per kategori | Stapeldiagram (bar) |
-| 2 | Forsaljning per produktkategori | Horisontellt stapeldiagram (barh) |
-| 3 | Forsaljningstrend per manad | Linjediagram (line) |
-| 4 | Forsaljning och ordrar per ar | Grupperat stapeldiagram |
-| 5 | Top 10 produkter | Horisontellt stapeldiagram (barh) |
-| 6 | Forsaljning och kunder per region | Grupperat stapeldiagram |
-| 7 | Ordervarde per region och kundtyp | Grupperat stapeldiagram |
-
-## Kundvarde-analys
-
-- Top 20 kunder efter inkopsvarde
-- RFM-segmentering (Recency, Frequency, Monetary)
-- Kundsegment-pivot (Store vs Individual)
-- Kundlivscykel per kohort
-
-## Anvandning
-
-1. Oppna `AdventureWorks_Forsaljningsanalys.ipynb` i Jupyter Notebook/Lab
-2. Konfigurera databasanslutningen i Setup-cellen
-3. Kor alla celler (Run All)
-
-## Tabeller som anvands
-
-**Production-schema:**
-- ProductCategory
-- ProductSubcategory
-- Product
-
-**Sales-schema:**
-- SalesOrderHeader
-- SalesOrderDetail
-- Customer
-- SalesTerritory
-- Store
-
-## Licens
-
-Detta projekt ar skapat for utbildningssyfte.
+**Rekommendationer:**
+- Identifiera whitespace för tillväxt i befintlig kundbas
+- Prioritera uppföljning av "At Risk"-kunder innan de churnar
+- Säkerställa pipeline med högvärdiga prospects
+- Utreda orsaken till den kraftiga omsättningsdippen
